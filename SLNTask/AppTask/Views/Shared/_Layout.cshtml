@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,59 +7,176 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/AppTask.styles.css" asp-append-version="true" />
+
+    <style>
+        body {
+            background-color: #f9fafb;
+            min-height: 100vh;
+            margin: 0;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        }
+
+        .app-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Lateral */
+        .sidebar {
+            width: 250px;
+            background-color: #1a173b;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            padding: 1.5rem 1rem;
+        }
+
+        .sidebar-brand {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 2rem;
+            padding-left: 0.5rem;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: #b0b3c7;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 12px;
+            transition: all 0.2s ease-in-out;
+        }
+
+            .sidebar-link:hover {
+                color: #ffffff;
+                background-color: rgba(255, 255, 255, 0.08);
+            }
+
+            /* Destaque da página atual */
+            .sidebar-link.active {
+                background-color: #5d2bee;
+                color: #ffffff;
+                box-shadow: 0 4px 12px rgba(93, 43, 238, 0.3);
+            }
+
+        /* Area de Conteudo */
+        .main-content {
+            flex-grow: 1;
+            background-color: #f9fafb;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        .content-body {
+            padding: 2rem;
+            flex-grow: 1;
+        }
+
+        .footer-custom {
+            padding: 1rem 2rem;
+            color: #9ca3af;
+            font-size: 0.85rem;
+            background-color: #f9fafb;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AppTask</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Tarefa" asp-action="Index">Tarefa</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Tarefa" asp-action="Sobre">Sobre</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Funcionarios" asp-action="Index">Funcionários</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Incidentes" asp-action="Index">Incidentes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="CentralDeCusto" asp-action="Index">Central de Custo</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Departamento" asp-action="Index">Departamentos</a>
-                        </li>
+    @{
+        var currentController = ViewContext.RouteData.Values["Controller"]?.ToString();
+        var currentAction = ViewContext.RouteData.Values["Action"]?.ToString();
+    }
 
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()            
-        </main>
+    <div class="app-wrapper">
+        <!-- Sidebar Lateral -->
+        <aside class="sidebar">
+            <a class="sidebar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                <span style="color: #5d2bee; font-size: 1.4rem;">📊</span> AppTask
+            </a>
+
+            <ul class="sidebar-nav">
+                <li>
+                    <a class="sidebar-link @(currentController == "Home" && currentAction == "Index" ? "active" : "")"
+                       asp-area="" asp-controller="Home" asp-action="Index">
+                        <span>🏠</span> Home
+                    </a>
+                </li>
+                <li>
+                    <a class="sidebar-link @(currentController == "Tarefa" && currentAction == "Index" ? "active" : "")"
+                       asp-area="" asp-controller="Tarefa" asp-action="Index">
+                        <span>✅</span> Tarefas
+                    </a>
+                </li>
+                <li>
+                    <a class="sidebar-link @(currentController == "Funcionarios" ? "active" : "")"
+                       asp-area="" asp-controller="Funcionarios" asp-action="Index">
+                        <span>👥</span> Funcionários
+                    </a>
+                </li>
+                <li>
+                    <a class="sidebar-link @(currentController == "Incidentes" ? "active" : "")"
+                       asp-area="" asp-controller="Incidentes" asp-action="Index">
+                        <span>🚨</span> Incidentes
+                    </a>
+                </li>
+                <li>
+                    <a class="sidebar-link @(currentController == "CentralDeCusto" ? "active" : "")"
+                       asp-area="" asp-controller="CentralDeCusto" asp-action="Index">
+                        <span>🏢</span> Central de Custo
+                    </a>
+                </li>
+                <li>
+                    <a class="sidebar-link @(currentController == "Departamento" ? "active" : "")"
+                       asp-area="" asp-controller="Departamento" asp-action="Index">
+                        <span>📁</span> Departamentos
+                    </a>
+                </li>
+                <li>
+                    <a class="sidebar-link @(currentController == "Tarefa" && currentAction == "Sobre" ? "active" : "")"
+                       asp-area="" asp-controller="Tarefa" asp-action="Sobre">
+                        <span>ℹ️</span> Sobre
+                    </a>
+                </li>
+                <li>
+                    <a class="sidebar-link @(currentController == "Home" && currentAction == "Privacy" ? "active" : "")"
+                       asp-area="" asp-controller="Home" asp-action="Privacy">
+                        <span>🔒</span> Privacy
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Área Principal -->
+        <div class="main-content">
+            <main role="main" class="content-body">
+                @RenderBody()
+            </main>
+
+            <footer class="footer-custom">
+                &copy; 2026 - AppTask - <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-decoration-none" style="color: #5d2bee;">Privacy</a>
+            </footer>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - AppTask - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
