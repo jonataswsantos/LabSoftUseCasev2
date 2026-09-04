@@ -1,105 +1,67 @@
 ﻿@model AppTask.Models.Tarefa
 
 @{
-    ViewData["Title"] = "Nova Tarefa";
+    ViewData["Title"] = "Create";
 }
 
-<div class="container py-4" style="background-color: #f8f9fa; min-height: 100vh;">
-    <div class="row justify-content-center">
-        <div class="col-md-10 col-lg-8">
+<h1>Create</h1>
 
-            <!-- Cabeçalho -->
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <div>
-                    <h1 class="h3 font-weight-bold mb-1" style="color: #1e1e2d; font-weight: 700;">Nova Tarefa</h1>
-                    <p class="text-muted small mb-0">Preencha os campos abaixo para cadastrar uma nova tarefa</p>
-                </div>
-                <a asp-action="Index" class="btn btn-outline-secondary px-3 py-2 font-weight-bold" style="border-radius: 8px;">
-                    ← Voltar
-                </a>
+<h4>Tarefa</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Descricao" class="control-label"></label>
+                <input asp-for="Descricao" class="form-control" />
+                <span asp-validation-for="Descricao" class="text-danger"></span>
             </div>
-
-            <!-- Cartão do Formulário -->
-            <div class="card border-0 shadow-sm p-3 p-md-4" style="border-radius: 16px; background-color: #ffffff;">
-                <div class="card-body">
-                    <form asp-action="Create">
-                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-
-                        <!-- Descrição -->
-                        <div class="form-group mb-3">
-                            <label asp-for="Descricao" class="form-label font-weight-bold" style="color: #2d3748;">Descrição</label>
-                            <input asp-for="Descricao" class="form-control py-2" style="border-radius: 8px;" placeholder="Informe o título ou descrição da tarefa" />
-                            <span asp-validation-for="Descricao" class="text-danger small"></span>
-                        </div>
-
-                        <!-- Funcionário e Status -->
-                        <div class="row">
-                            <div class="col-md-6 form-group mb-3">
-                                <label asp-for="FuncionarioId" class="form-label font-weight-bold" style="color: #2d3748;">Funcionário</label>
-                                <select asp-for="FuncionarioId" class="form-control form-select py-2" style="border-radius: 8px;" asp-items="ViewBag.ListaFuncionario">
-                                    <option value="">-- Selecione o Funcionário --</option>
-                                </select>
-                                <span asp-validation-for="FuncionarioId" class="text-danger small"></span>
-                            </div>
-                            <div class="col-md-6 form-group mb-3">
-                                <label asp-for="StatusTarefa" class="form-label font-weight-bold" style="color: #2d3748;">Status</label>
-                                <input asp-for="StatusTarefa" class="form-control py-2" style="border-radius: 8px;" placeholder="Ex: Pendente, Em Andamento..." />
-                                <span asp-validation-for="StatusTarefa" class="text-danger small"></span>
-                            </div>
-                        </div>
-
-                        <!-- Planejada e Prazo -->
-                        <div class="row">
-                            <div class="col-md-6 form-group mb-3">
-                                <label asp-for="DataPlanejada" class="form-label font-weight-bold" style="color: #2d3748;">Data Planejada</label>
-                                <input asp-for="DataPlanejada" class="form-control py-2" style="border-radius: 8px;" />
-                                <span asp-validation-for="DataPlanejada" class="text-danger small"></span>
-                            </div>
-                            <div class="col-md-6 form-group mb-3">
-                                <label asp-for="Prazo" class="form-label font-weight-bold" style="color: #2d3748;">Prazo</label>
-                                <input asp-for="Prazo" class="form-control py-2" style="border-radius: 8px;" />
-                                <span asp-validation-for="Prazo" class="text-danger small"></span>
-                            </div>
-                        </div>
-
-                        <!-- Execução: Iniciada, Finalizada e Cancelada -->
-                        <div class="row">
-                            <div class="col-md-4 form-group mb-3">
-                                <label asp-for="DataIniciada" class="form-label font-weight-bold" style="color: #2d3748;">Data Iniciada</label>
-                                <input asp-for="DataIniciada" class="form-control py-2" style="border-radius: 8px;" />
-                                <span asp-validation-for="DataIniciada" class="text-danger small"></span>
-                            </div>
-                            <div class="col-md-4 form-group mb-3">
-                                <label asp-for="DataFinalizada" class="form-label font-weight-bold" style="color: #2d3748;">Data Finalizada</label>
-                                <input asp-for="DataFinalizada" class="form-control py-2" style="border-radius: 8px;" />
-                                <span asp-validation-for="DataFinalizada" class="text-danger small"></span>
-                            </div>
-                            <div class="col-md-4 form-group mb-3">
-                                <label asp-for="DataCancelada" class="form-label font-weight-bold" style="color: #2d3748;">Data Cancelada</label>
-                                <input asp-for="DataCancelada" class="form-control py-2" style="border-radius: 8px;" />
-                                <span asp-validation-for="DataCancelada" class="text-danger small"></span>
-                            </div>
-                        </div>
-
-                        <!-- Botões de Ação -->
-                        <div class="d-flex justify-content-end gap-2 border-top pt-4 mt-3">
-                            <a asp-action="Index" class="btn btn-light px-4 py-2 border-0 mr-2" style="background-color: #f1f5f9; border-radius: 8px; font-weight: 500;">
-                                Cancelar
-                            </a>
-                            <button type="submit" class="btn text-white px-4 py-2 font-weight-bold shadow-sm" style="background-color: #5925dc; border-radius: 8px;">
-                                Cadastrar Tarefa
-                            </button>
-                        </div>
-                    </form>
-                </div>
+            <div class="form-group">
+                <label asp-for="DataPlanejada" class="control-label"></label>
+                <input asp-for="DataPlanejada" class="form-control" />
+                <span asp-validation-for="DataPlanejada" class="text-danger"></span>
             </div>
-
-        </div>
+            <div class="form-group">
+                <label asp-for="DataIniciada" class="control-label"></label>
+                <input asp-for="DataIniciada" class="form-control" />
+                <span asp-validation-for="DataIniciada" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataFinalizada" class="control-label"></label>
+                <input asp-for="DataFinalizada" class="form-control" />
+                <span asp-validation-for="DataFinalizada" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataCancelada" class="control-label"></label>
+                <input asp-for="DataCancelada" class="form-control" />
+                <span asp-validation-for="DataCancelada" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StatusTarefa" class="control-label"></label>
+                <input asp-for="StatusTarefa" class="form-control" />
+                <span asp-validation-for="StatusTarefa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Prazo" class="control-label"></label>
+                <input asp-for="Prazo" class="form-control" />
+                <span asp-validation-for="Prazo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FuncionarioId" class="control-label"></label>
+                <select asp-for="FuncionarioId" class="form-control" asp-items="ViewBag.ListaFuncionario"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
 </div>
 
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
