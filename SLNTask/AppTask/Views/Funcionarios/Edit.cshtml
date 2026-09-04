@@ -1,0 +1,64 @@
+﻿@model AppTask.Models.Funcionario
+
+@{
+    ViewData["Title"] = "Editar Funcionário";
+}
+
+<div class="container py-4" style="background-color: #f8f9fa; min-height: 100vh;">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+
+            <!-- Cabeçalho -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h1 class="h3 font-weight-bold mb-1" style="color: #1e1e2d; font-weight: 700;">Editar Funcionário</h1>
+                    <p class="text-muted small mb-0">Atualize os dados do funcionário selecionado</p>
+                </div>
+                <a asp-action="Index" class="btn btn-outline-secondary px-3 py-2 font-weight-bold" style="border-radius: 8px;">
+                    ← Voltar
+                </a>
+            </div>
+
+            <!-- Cartão do Formulário -->
+            <div class="card border-0 shadow-sm p-3 p-md-4" style="border-radius: 16px; background-color: #ffffff;">
+                <div class="card-body">
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        <input type="hidden" asp-for="Codigo" />
+
+                        <!-- Nome -->
+                        <div class="form-group mb-3">
+                            <label asp-for="Nome" class="form-label font-weight-bold" style="color: #2d3748;">Nome</label>
+                            <input asp-for="Nome" class="form-control py-2" style="border-radius: 8px;" placeholder="Informe o nome completo" />
+                            <span asp-validation-for="Nome" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Cargo -->
+                        <div class="form-group mb-4">
+                            <label asp-for="Cargo" class="form-label font-weight-bold" style="color: #2d3748;">Cargo</label>
+                            <input asp-for="Cargo" class="form-control py-2" style="border-radius: 8px;" placeholder="Informe o cargo ou função" />
+                            <span asp-validation-for="Cargo" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Botões de Ação -->
+                        <div class="d-flex justify-content-end gap-2 border-top pt-4 mt-3">
+                            <a asp-action="Index" class="btn btn-light px-4 py-2 border-0 mr-2" style="background-color: #f1f5f9; border-radius: 8px; font-weight: 500;">
+                                Cancelar
+                            </a>
+                            <button type="submit" class="btn text-white px-4 py-2 font-weight-bold shadow-sm" style="background-color: #5925dc; border-radius: 8px;">
+                                Salvar Alterações
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

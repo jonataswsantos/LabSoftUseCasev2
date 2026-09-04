@@ -1,0 +1,92 @@
+﻿@model AppTask.Models.Funcionario
+
+@{
+    ViewData["Title"] = "Excluir Funcionário";
+}
+
+<div class="container py-4" style="background-color: #f8f9fa; min-height: 100vh;">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+
+            <!-- Cabeçalho -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h1 class="h3 font-weight-bold mb-1" style="color: #1e1e2d; font-weight: 700;">Excluir Funcionário</h1>
+                    <p class="text-muted small mb-0">Confirme os dados antes de remover o registro</p>
+                </div>
+                <a asp-action="Index" class="btn btn-outline-secondary px-3 py-2 font-weight-bold" style="border-radius: 8px;">
+                    ← Voltar
+                </a>
+            </div>
+
+            <!-- Cartão de Confirmação -->
+            <div class="card border-0 shadow-sm p-3 p-md-4" style="border-radius: 16px; background-color: #ffffff;">
+                <div class="card-body">
+
+                    <!-- Alerta de Atenção -->
+                    <div class="alert p-3 mb-4 d-flex align-items-center" style="background-color: #ffe4e6; color: #9f1239; border-radius: 12px; border: 1px solid #fecdd3;">
+                        <span class="mr-2" style="font-size: 1.2rem;">⚠️</span>
+                        <div>
+                            <strong>Tem certeza que deseja excluir este funcionário?</strong>
+                            <div class="small">Esta ação é permanente e não poderá ser desfeita.</div>
+                        </div>
+                    </div>
+
+                    <!-- Ícone, Nome e Cargo -->
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 56px; height: 56px; background-color: #f3e8ff; color: #6b21a8; font-size: 1.5rem;">
+                            👤
+                        </div>
+                        <div>
+                            <h3 class="h4 font-weight-bold mb-1" style="color: #2d3748;">
+                                @Html.DisplayFor(model => model.Nome)
+                            </h3>
+                            <span class="badge px-3 py-1 font-weight-normal" style="background-color: #f1f5f9; color: #475569; border-radius: 12px; font-size: 0.85rem;">
+                                💼 @Html.DisplayFor(model => model.Cargo)
+                            </span>
+                        </div>
+                    </div>
+
+                    <hr class="my-4" style="border-top: 1px solid #edf2f7;" />
+
+                    <!-- Informações Detalhadas -->
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <div class="p-3 rounded" style="background-color: #f8fafc; border: 1px solid #e2e8f0;">
+                                <div class="text-muted small mb-1">👤 Nome Completo</div>
+                                <div class="font-weight-bold" style="color: #2d3748;">
+                                    @Html.DisplayFor(model => model.Nome)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 mb-3">
+                            <div class="p-3 rounded" style="background-color: #f8fafc; border: 1px solid #e2e8f0;">
+                                <div class="text-muted small mb-1">💼 Cargo / Função</div>
+                                <div class="font-weight-bold" style="color: #2d3748;">
+                                    @Html.DisplayFor(model => model.Cargo)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form de Confirmação de Exclusão -->
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="Codigo" />
+
+                        <div class="d-flex justify-content-end gap-2 border-top pt-4 mt-3">
+                            <a asp-action="Index" class="btn btn-light px-4 py-2 border-0 mr-2" style="background-color: #f1f5f9; border-radius: 8px; font-weight: 500;">
+                                Cancelar
+                            </a>
+                            <button type="submit" class="btn text-white px-4 py-2 font-weight-bold shadow-sm" style="background-color: #e11d48; border-radius: 8px;">
+                                Confirmar Exclusão
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

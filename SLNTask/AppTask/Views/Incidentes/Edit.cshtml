@@ -1,0 +1,85 @@
+﻿@model AppTask.Models.Incidentes
+
+@{
+    ViewData["Title"] = "Editar Incidente";
+}
+
+<div class="container py-4" style="background-color: #f8f9fa; min-height: 100vh;">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+
+            <!-- Cabeçalho -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h1 class="h3 font-weight-bold mb-1" style="color: #1e1e2d; font-weight: 700;">Editar Incidente</h1>
+                    <p class="text-muted small mb-0">Atualize as informações do incidente registrado</p>
+                </div>
+                <a asp-action="Index" class="btn btn-outline-secondary px-3 py-2 font-weight-bold" style="border-radius: 8px;">
+                    ← Voltar
+                </a>
+            </div>
+
+            <!-- Cartão do Formulário -->
+            <div class="card border-0 shadow-sm p-3 p-md-4" style="border-radius: 16px; background-color: #ffffff;">
+                <div class="card-body">
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        <input type="hidden" asp-for="Codigo" />
+
+                        <!-- Descrição do Problema -->
+                        <div class="form-group mb-3">
+                            <label asp-for="DescricaoProblema" class="form-label font-weight-bold" style="color: #2d3748;">Descrição do Problema</label>
+                            <input asp-for="DescricaoProblema" class="form-control py-2" style="border-radius: 8px;" placeholder="Informe a descrição do problema" />
+                            <span asp-validation-for="DescricaoProblema" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Data do Incidente -->
+                        <div class="form-group mb-3">
+                            <label asp-for="DataIncidente" class="form-label font-weight-bold" style="color: #2d3748;">Data do Incidente</label>
+                            <input asp-for="DataIncidente" class="form-control py-2" style="border-radius: 8px;" />
+                            <span asp-validation-for="DataIncidente" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Solução -->
+                        <div class="form-group mb-3">
+                            <label asp-for="Solucao" class="form-label font-weight-bold" style="color: #2d3748;">Solução Aplicada</label>
+                            <input asp-for="Solucao" class="form-control py-2" style="border-radius: 8px;" placeholder="Descreva a solução aplicada (se houver)" />
+                            <span asp-validation-for="Solucao" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Status de Resolução -->
+                        <div class="form-group mb-4">
+                            <div class="p-3 rounded d-flex align-items-center" style="background-color: #f8fafc; border: 1px solid #e2e8f0;">
+                                <input asp-for="Resolvido" class="form-check-input mr-2" id="ResolvidoCheck" style="width: 18px; height: 18px; cursor: pointer; position: static; margin-top: 0;" />
+                                <div>
+                                    <label class="form-check-label font-weight-bold mb-0" for="ResolvidoCheck" style="color: #2d3748; cursor: pointer;">
+                                        Incidente Resolvido
+                                    </label>
+                                    <div class="small text-muted">Marque esta opção caso o problema já tenha sido solucionado.</div>
+                                </div>
+                            </div>
+                            <span asp-validation-for="Resolvido" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Botões de Ação -->
+                        <div class="d-flex justify-content-end gap-2 border-top pt-4 mt-3">
+                            <a asp-action="Index" class="btn btn-light px-4 py-2 border-0 mr-2" style="background-color: #f1f5f9; border-radius: 8px; font-weight: 500;">
+                                Cancelar
+                            </a>
+                            <button type="submit" class="btn text-white px-4 py-2 font-weight-bold shadow-sm" style="background-color: #5925dc; border-radius: 8px;">
+                                Salvar Alterações
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

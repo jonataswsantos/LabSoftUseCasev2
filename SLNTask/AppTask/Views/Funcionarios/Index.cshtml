@@ -1,0 +1,71 @@
+﻿@model IEnumerable<AppTask.Models.Funcionario>
+
+@{
+    ViewData["Title"] = "Funcionários";
+}
+
+<div class="container-fluid p-4" style="background-color: #f8f9fa; min-height: 100vh;">
+    <!-- Cabeçalho -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 font-weight-bold mb-1" style="color: #1e1e2d; font-weight: 700;">Funcionários</h1>
+            <p class="text-muted small mb-0">@(Model != null ? Model.Count() : 0) funcionário(s) cadastrado(s)</p>
+        </div>
+        <a asp-action="Create" class="btn text-white px-4 py-2 font-weight-bold shadow-sm" style="background-color: #5925dc; border-radius: 8px;">
+            + Novo Funcionário
+        </a>
+    </div>
+
+    <!-- Lista em Cartões -->
+    <div class="row">
+        @if (Model != null && Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 border-0 shadow-sm p-2" style="border-radius: 16px; background-color: #ffffff;">
+                        <div class="card-body d-flex flex-column justify-content-between">
+
+                            <div>
+                                <!-- Icone, Nome e Cargo -->
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 48px; height: 48px; background-color: #f3e8ff; color: #6b21a8; font-size: 1.2rem;">
+                                        👤
+                                    </div>
+                                    <div>
+                                        <h5 class="card-title mb-1 font-weight-bold" style="color: #2d3748; font-size: 1.1rem;">
+                                            @Html.DisplayFor(modelItem => item.Nome)
+                                        </h5>
+                                        <span class="badge px-3 py-1 font-weight-normal" style="background-color: #f1f5f9; color: #475569; border-radius: 12px; font-size: 0.8rem;">
+                                            💼 @Html.DisplayFor(modelItem => item.Cargo)
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Botões de Ação -->
+                            <div class="d-flex justify-content-between gap-2 border-top pt-3 mt-3">
+                                <a asp-action="Details" asp-route-id="@item.Codigo" class="btn btn-sm flex-fill py-2 border-0 text-muted" style="background-color: #f8fafc; border-radius: 8px; font-weight: 500;">
+                                    Abrir
+                                </a>
+                                <a asp-action="Edit" asp-route-id="@item.Codigo" class="btn btn-sm flex-fill py-2 border-0" style="background-color: #f0f0ff; color: #5925dc; border-radius: 8px; font-weight: 500;">
+                                    Editar
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.Codigo" class="btn btn-sm flex-fill py-2 border-0" style="background-color: #ffe4e6; color: #e11d48; border-radius: 8px; font-weight: 500;">
+                                    Excluir
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12 text-center text-muted py-5">
+                Nenhum funcionário encontrado.
+            </div>
+        }
+    </div>
+</div>

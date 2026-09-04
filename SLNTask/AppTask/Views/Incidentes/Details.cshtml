@@ -1,0 +1,107 @@
+﻿@model AppTask.Models.Incidentes
+
+@{
+    ViewData["Title"] = "Detalhes do Incidente";
+
+    bool isResolvido = !string.IsNullOrEmpty(Model?.Resolvido) &&
+        (Model.Resolvido.Equals("Sim", StringComparison.OrdinalIgnoreCase) ||
+         Model.Resolvido.Equals("True", StringComparison.OrdinalIgnoreCase) ||
+         Model.Resolvido.Equals("S", StringComparison.OrdinalIgnoreCase) ||
+         Model.Resolvido.Equals("Resolvido", StringComparison.OrdinalIgnoreCase));
+}
+
+<div class="container py-4" style="background-color: #f9fafb; min-height: 100vh;">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+
+            <!-- Cabeçalho -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h1 class="h3 font-weight-bold mb-1" style="color: #111827; font-weight: 700;">Detalhes do Incidente</h1>
+                    <p class="text-muted small mb-0" style="color: #6b7280;">Registro #@Model?.Codigo</p>
+                </div>
+                <a asp-action="Index" class="btn px-3 py-2 font-weight-bold text-decoration-none" style="background-color: #f5f6fa; color: #5a607f; border-radius: 8px; border: none;">
+                    Voltar
+                </a>
+            </div>
+
+            <!-- Cartão Principal -->
+            <div class="card border-0 shadow-sm p-3 p-md-4" style="border-radius: 16px; background-color: #ffffff; border: 1px solid #f1f5f9;">
+                <div class="card-body p-2">
+
+                    <!-- Título e Tag de Status -->
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h2 class="h5 font-weight-bold mb-0" style="color: #111827; font-weight: 700;">
+                                @Html.DisplayFor(model => model.DescricaoProblema)
+                            </h2>
+                            <span class="badge px-3 py-1 font-weight-bold" style="background-color: #f1f3f9; color: #3b4256; border-radius: 12px; font-size: 0.78rem;">
+                                💼 @(isResolvido ? "Resolvido" : "Em Aberto")
+                            </span>
+                        </div>
+                    </div>
+
+                    <hr style="border-top: 1px solid #f3f4f6; margin: 16px 0;" />
+
+                    <!-- Informações Detalhadas -->
+                    <div class="row g-3 mb-4">
+                        <div class="col-6">
+                            <div class="p-3" style="background-color: #f9fafb; border: 1px solid #f1f5f9; border-radius: 12px;">
+                                <div class="small mb-1" style="color: #6b7280;">🔢 Código</div>
+                                <div class="font-weight-bold" style="color: #111827;">
+                                    #@Model?.Codigo
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="p-3" style="background-color: #f9fafb; border: 1px solid #f1f5f9; border-radius: 12px;">
+                                <div class="small mb-1" style="color: #6b7280;">📅 Data</div>
+                                <div class="font-weight-bold" style="color: #111827; font-size: 0.9rem;">
+                                    @Model?.DataIncidente.ToString("dd/MM/yyyy HH:mm")
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="p-3" style="background-color: #f9fafb; border: 1px solid #f1f5f9; border-radius: 12px;">
+                                <div class="small mb-1" style="color: #6b7280;">💡 Solução Aplicada</div>
+                                <div class="font-weight-bold" style="color: #111827;">
+                                    @if (!string.IsNullOrEmpty(Model?.Solucao))
+                                    {
+                                        @Html.DisplayFor(model => model.Solucao)
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted font-italic font-weight-normal">Nenhuma solução cadastrada.</span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botões de Ação na Base (Cores Fiéis à Imagem) -->
+                    <div class="row g-2 pt-2 border-top">
+                        <div class="col-4">
+                            <a asp-action="Index" class="btn w-100 py-2 font-weight-bold text-center text-decoration-none" style="background-color: #f5f6fa; color: #5a607f; border-radius: 8px; font-size: 0.85rem; border: none;">
+                                Abrir
+                            </a>
+                        </div>
+                        <div class="col-4">
+                            <a asp-action="Edit" asp-route-id="@Model?.Codigo" class="btn w-100 py-2 font-weight-bold text-center text-decoration-none" style="background-color: #f0ebff; color: #6d2bee; border-radius: 8px; font-size: 0.85rem; border: none;">
+                                Editar
+                            </a>
+                        </div>
+                        <div class="col-4">
+                            <a asp-action="Delete" asp-route-id="@Model?.Codigo" class="btn w-100 py-2 font-weight-bold text-center text-decoration-none" style="background-color: #fde8e8; color: #dc2626; border-radius: 8px; font-size: 0.85rem; border: none;">
+                                Excluir
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
