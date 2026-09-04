@@ -1,0 +1,93 @@
+﻿@model AppTask.Models.Departamento
+
+@{
+    ViewData["Title"] = "Excluir Departamento";
+
+    bool isAtivo = false;
+    if (Model?.Ativo != null)
+    {
+        if (Model.Ativo is bool b)
+        {
+            isAtivo = b;
+        }
+        else
+        {
+            string str = Model.Ativo.ToString();
+            isAtivo = str.Equals("True", StringComparison.OrdinalIgnoreCase) ||
+                      str.Equals("Sim", StringComparison.OrdinalIgnoreCase) ||
+                      str.Equals("S", StringComparison.OrdinalIgnoreCase) ||
+                      str.Equals("1", StringComparison.OrdinalIgnoreCase) ||
+                      str.Equals("Ativo", StringComparison.OrdinalIgnoreCase);
+        }
+    }
+}
+
+<div class="container py-4" style="background-color: #f9fafb; min-height: 100vh;">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+
+            <!-- Cabeçalho -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h1 class="h3 font-weight-bold mb-1" style="color: #111827; font-weight: 700;">Excluir Departamento</h1>
+                    <p class="text-muted small mb-0" style="color: #6b7280;">Confirme os dados antes de remover o registro</p>
+                </div>
+                <a asp-action="Index" class="btn px-3 py-2 font-weight-bold text-decoration-none" style="background-color: #f5f6fa; color: #5a607f; border-radius: 8px; border: none;">
+                    ← Voltar
+                </a>
+            </div>
+
+            <!-- Cartão de Confirmação -->
+            <div class="card border-0 shadow-sm p-3 p-md-4" style="border-radius: 16px; background-color: #ffffff; border: 1px solid #f1f5f9;">
+                <div class="card-body p-2">
+
+                    <!-- Alerta de Atenção -->
+                    <div class="alert p-3 mb-4 d-flex align-items-center border-0" style="background-color: #fde8e8; color: #991b1b; border-radius: 12px;">
+                        <span class="me-2" style="font-size: 1.2rem;">⚠️</span>
+                        <div>
+                            <strong>Tem certeza que deseja excluir este departamento?</strong>
+                            <div class="small">Esta ação é permanente e não poderá ser desfeita.</div>
+                        </div>
+                    </div>
+
+                    <!-- Informações do Registro -->
+                    <div class="row g-3 mb-4">
+                        <div class="col-12">
+                            <div class="p-3" style="background-color: #f9fafb; border: 1px solid #f1f5f9; border-radius: 12px;">
+                                <div class="small mb-1" style="color: #6b7280;">📁 Descrição do Departamento</div>
+                                <div class="font-weight-bold" style="color: #111827;">
+                                    @Html.DisplayFor(model => model.Descricao)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="p-3" style="background-color: #f9fafb; border: 1px solid #f1f5f9; border-radius: 12px;">
+                                <div class="small mb-1" style="color: #6b7280;">⚙️ Status Registrado</div>
+                                <div class="font-weight-bold" style="color: #111827;">
+                                    @(isAtivo ? "Ativo" : "Inativo")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form de Confirmação -->
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="Codigo" />
+
+                        <div class="d-flex justify-content-end gap-2 pt-2 border-top">
+                            <a asp-action="Index" class="btn px-4 py-2 me-2 font-weight-bold text-decoration-none" style="background-color: #f5f6fa; color: #5a607f; border-radius: 8px; border: none; font-size: 0.85rem;">
+                                Cancelar
+                            </a>
+                            <button type="submit" class="btn font-weight-bold shadow-sm" style="background-color: #fde8e8; color: #dc2626; border-radius: 8px; border: none; font-size: 0.85rem; padding: 0.5rem 1.5rem;">
+                                Confirmar Exclusão
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

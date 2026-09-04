@@ -1,6 +1,42 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Política de Privacidade";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<div class="container py-5" style="background-color: #f9fafb; min-height: 100vh;">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+
+            <!-- Cartão Principal -->
+            <div class="card border-0 shadow-sm p-4" style="border-radius: 16px; background-color: #ffffff; border: 1px solid #f1f5f9;">
+                <div class="card-body py-2">
+
+                    <!-- Ícone de Destaque -->
+                    <div class="rounded-circle d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px; background-color: #f0ebff; color: #5d2bee; font-size: 1.6rem;">
+                        🔒
+                    </div>
+
+                    <!-- Título -->
+                    <h1 class="h3 font-weight-bold mb-2" style="color: #111827; font-weight: 700;">
+                        @ViewData["Title"]
+                    </h1>
+
+                    <hr style="border-top: 1px solid #f3f4f6; margin: 16px 0;" />
+
+                    <!-- Conteúdo -->
+                    <p style="color: #4b5563; font-size: 0.95rem; line-height: 1.6;">
+                        Utilize esta página para detalhar a política de privacidade do seu site, informando aos usuários como seus dados e registros são tratados com segurança no sistema.
+                    </p>
+
+                    <!-- Botão Voltar -->
+                    <div class="pt-3 mt-3 border-top">
+                        <a asp-controller="Home" asp-action="Index" class="btn px-4 py-2 font-weight-bold text-decoration-none" style="background-color: #f5f6fa; color: #5a607f; border-radius: 8px; border: none; font-size: 0.85rem;">
+                            ← Voltar
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
