@@ -1,112 +1,77 @@
 ﻿@model IEnumerable<AppTask.Models.Tarefa>
 
 @{
-    ViewData["Title"] = "Tarefas";
+    ViewData["Title"] = "Index";
 }
 
-<div class="container-fluid p-4" style="background-color: #f8f9fa;">
-    <!-- Cabeçalho -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <div>
-            <h1 class="h3 font-weight-bold mb-1" style="color: #1e1e2d; font-weight: 700;">Tarefas</h1>
-            <p class="text-muted small mb-0">@(Model != null ? Model.Count() : 0) tarefa(s) cadastrada(s)</p>
-        </div>
-        <a asp-action="Create" class="btn text-white px-4 py-2 font-weight-bold shadow-sm" style="background-color: #5925dc; border-radius: 8px;">
-            + Nova Tarefa
-        </a>
-    </div>
+<h1>Index</h1>
 
-    <!-- Lista em Cartões -->
-    <div class="row">
-        @if (Model != null && Model.Any())
-        {
-            @foreach (var item in Model)
-            {
-                <div class="col-md-6 col-lg-5 mb-4">
-                    <div class="card h-100 border-0 shadow-sm p-2" style="border-radius: 16px; background-color: #ffffff;">
-                        <div class="card-body">
-
-                            <!-- Título e Status -->
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h5 class="card-title mb-0 font-weight-bold" style="color: #2d3748; font-size: 1.1rem;">
-                                    @Html.DisplayFor(modelItem => item.Descricao)
-                                </h5>
-                                @{
-                                    var statusText = item.StatusTarefa?.ToString()?.ToUpper() ?? "";
-                                    var bgStatus = "#f1f5f9";
-                                    var textStatus = "#475569";
-
-                                    if (statusText.Contains("ANDAMENTO"))
-                                    {
-                                        bgStatus = "#fef3c7";
-                                        textStatus = "#d97706";
-                                    }
-                                    else if (statusText.Contains("FINALIZADA"))
-                                    {
-                                        bgStatus = "#dcfce7";
-                                        textStatus = "#15803d";
-                                    }
-                                    else if (statusText.Contains("CANCELADA"))
-                                    {
-                                        bgStatus = "#fee2e2";
-                                        textStatus = "#b91c1c";
-                                    }
-                                }
-                                <span class="badge px-3 py-2 text-uppercase font-weight-bold" style="background-color: @bgStatus; color: @textStatus; border-radius: 20px; font-size: 0.75rem;">
-                                    @Html.DisplayFor(modelItem => item.StatusTarefa)
-                                </span>
-                            </div>
-
-                            <!-- Funcionário -->
-                            <div class="mb-3">
-                                <span class="badge px-3 py-2 font-weight-normal" style="background-color: #f3e8ff; color: #6b21a8; border-radius: 20px; font-size: 0.85rem;">
-                                    👤 @(item.Funcionario != null ? item.Funcionario.Nome : "Sem funcionário")
-                                </span>
-                            </div>
-
-                            <!-- Datas e Informações -->
-                            <div class="small mb-4" style="color: #4a5568; line-height: 2;">
-                                <div>
-                                    <span class="mr-1">🗓️</span> <strong>Planejada:</strong>
-                                    @Html.DisplayFor(modelItem => item.DataPlanejada)
-                                </div>
-                                <div>
-                                    <span class="mr-1">▶️</span> <strong>Iniciada:</strong>
-                                    @Html.DisplayFor(modelItem => item.DataIniciada)
-                                </div>
-                                <div>
-                                    <span class="mr-1">✅</span> <strong>Finalizada:</strong>
-                                    @Html.DisplayFor(modelItem => item.DataFinalizada)
-                                </div>
-                                <div>
-                                    <span class="mr-1">⌛</span> <strong>Prazo:</strong>
-                                    @Html.DisplayFor(modelItem => item.Prazo)
-                                </div>
-                            </div>
-
-                            <!-- Botões de Ação -->
-                            <div class="d-flex justify-content-between gap-2 border-top pt-3">
-                                <a asp-action="Details" asp-route-id="@item.Codigo" class="btn btn-sm flex-fill py-2 border-0 text-muted" style="background-color: #f8fafc; border-radius: 8px; font-weight: 500;">
-                                    Abrir
-                                </a>
-                                <a asp-action="Edit" asp-route-id="@item.Codigo" class="btn btn-sm flex-fill py-2 border-0" style="background-color: #f0f0ff; color: #5925dc; border-radius: 8px; font-weight: 500;">
-                                    Editar
-                                </a>
-                                <a asp-action="Delete" asp-route-id="@item.Codigo" class="btn btn-sm flex-fill py-2 border-0" style="background-color: #ffe4e6; color: #e11d48; border-radius: 8px; font-weight: 500;">
-                                    Excluir
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            }
-        }
-        else
-        {
-            <div class="col-12 text-center text-muted py-5">
-                Nenhuma tarefa encontrada.
-            </div>
-        }
-    </div>
-</div>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataPlanejada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataIniciada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataFinalizada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataCancelada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusTarefa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prazo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Funcionario)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataPlanejada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataIniciada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataFinalizada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataCancelada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusTarefa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prazo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Funcionario.Nome)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Codigo">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Codigo">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Codigo">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
